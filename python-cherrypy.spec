@@ -1,17 +1,12 @@
-# $Id$
-# Authority: arrfab
-
-%define python_sitelib %(%{__python} -c 'from distutils import sysconfig; print sysconfig.get_python_lib()')
+%{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
 Name:           python-cherrypy
 Version:        3.1.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Pythonic, object-oriented web development framework
 Group:          Development/Libraries
 License:        BSD
 URL:            http://www.cherrypy.org/
-Packager: Dag Wieers <dag@wieers.com>
-Vendor: Dag Apt Repository, http://dag.wieers.com/apt/
 
 Source0:        http://download.cherrypy.org/cherrypy/%{version}/CherryPy-%{version}.tar.gz
 
@@ -48,5 +43,8 @@ rm -rf %{buildroot}
 %{python_sitelib}/*
 
 %changelog
+* Mon Mar 26 2012 Konstantin Kozlov <mackoel@gmail.com> - 3.1.2-2
+- Corrected first line of spec, removed Packager and Vendor
+
 * Mon Oct 25 2010 Fabian Arrotin <fabian.arrotin@arrfab.net> - 3.1.2 - 9200/arrfab
 - Initial package
